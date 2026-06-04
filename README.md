@@ -1,33 +1,24 @@
 # BodyProgress
 
-BodyProgress is an open-source fitness coaching analytics tool.
+BodyProgress is a fitness coaching analytics tool built with Python.
 
 ## Features
 
-* Track body weight
-* Track body fat percentage
-* Track muscle mass
-* Track visceral fat
-* Track body age
-* Track body measurements
+- Weight tracking
+- Body fat tracking
+- Muscle mass tracking
+- Visceral fat tracking
+- Body measurements tracking
+- Coaching summary report
 
-## Analytics
+## Current Status
 
-* Weight change
-* Body fat change
-* Muscle gain/loss
-* Total body measurement change
-* Coach summary report
+Version: 0.1.0
 
-## Tech Stack
+## Roadmap
 
-* Python
-* CSV database
-
-## Future Roadmap
-
-* Charts and trends
-* PDF reports
-* Web dashboard
-* FastAPI backend
-* React frontend
+- [ ] Progress charts
+- [ ] PDF reports
+- [ ] Student management
+- [ ] FastAPI backend
+- [ ] React dashboard
