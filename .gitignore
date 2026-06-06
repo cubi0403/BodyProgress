@@ -1,0 +1,15 @@
+# PyCharm
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Reports
+reports/
+
+# PDFs
+pdf_reports/
+
+# Optional charts
+# charts/
