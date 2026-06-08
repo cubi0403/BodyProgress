@@ -4,17 +4,22 @@ import pandas as pd
 from reportlab.platypus import (
     SimpleDocTemplate,
     Paragraph,
-    Spacer
+    Spacer,
+    Image,
+    PageBreak
 )
 
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from reportlab.pdfbase.ttfonts import TTFont
 
 
 # 註冊中文字體
 pdfmetrics.registerFont(
-    UnicodeCIDFont('MSung-Light')
+    TTFont(
+        'MicrosoftJhengHei',
+        r'C:\Windows\Fonts\msjh.ttc'
+    )
 )
 
 df = pd.read_csv("students.csv")
@@ -22,6 +27,10 @@ df = pd.read_csv("students.csv")
 os.makedirs("pdf_reports", exist_ok=True)
 
 styles = getSampleStyleSheet()
+
+styles["Title"].fontName = "MicrosoftJhengHei"
+styles["BodyText"].fontName = "MicrosoftJhengHei"
+styles["Heading2"].fontName = "MicrosoftJhengHei"
 
 students = df["name"].unique()
 
@@ -80,8 +89,45 @@ for student in students:
         )
     )
 
+    # 加入圖表
+
+    chart_files = [
+        f"charts/{student}_weight.png",
+        f"charts/{student}_bodyfat.png",
+        f"charts/{student}_muscle.png",
+        f"charts/{student}_visceral_fat.png"
+    ]
+
+    for chart in chart_files:
+
+        if os.path.exists(chart):
+            content.append(PageBreak())
+
+            chart_name = (
+                os.path.basename(chart)
+                .replace(".png", "")
+            )
+
+            content.append(
+                Paragraph(
+                    chart_name,
+                    styles["Heading2"]
+                )
+            )
+
+            content.append(
+                Spacer(1, 12)
+            )
+
+            content.append(
+                Image(
+                    chart,
+                    width=450,
+                    height=280
+                )
+            )
+
+    # 建立PDF
     doc.build(content)
 
     print(f"已建立：{pdf_file}")
-
-print("\n全部 PDF 完成!!!")
