@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>BodyProgress</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="container mt-5">
+
+<h1 class="mb-4">
+BodyProgress 學員管理
+</h1>
+
+<a href="/form" class="btn btn-primary mb-4">
+新增資料
+</a>
+
+{% for student in students %}
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h4>{{ student }}</h4>
+
+<a href="/student/{{ student }}"
+class="btn btn-success">
+
+查看資料
+
+</a>
+
+<a href="/download_report/{{ student }}"
+class="btn btn-secondary">
+
+PDF
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</body>
+
+</html>
