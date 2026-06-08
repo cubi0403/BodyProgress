@@ -18,11 +18,22 @@ templates = Jinja2Templates(
 )
 
 @app.get("/")
-def home():
-    return {
-        "project": "BodyProgress",
-        "status": "running"
-    }
+def dashboard(request: Request):
+
+    df = pd.read_csv("students.csv")
+
+    student_count = df["name"].nunique()
+
+    measurement_count = len(df)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="dashboard.html",
+        context={
+            "student_count": student_count,
+            "measurement_count": measurement_count
+        }
+    )
 
 @app.get("/form", response_class=HTMLResponse)
 def form_page(request: Request):
@@ -158,19 +169,28 @@ def submit_form(
     )
 
 @app.get("/students")
-def students_page(request: Request):
+def students_page(
+    request: Request,
+    search: str = ""
+):
 
     df = pd.read_csv("students.csv")
 
-    students = sorted(
-        df["name"].unique().tolist()
-    )
+    students = sorted(df["name"].unique())
+
+    if search:
+
+        students = [
+            s for s in students
+            if search.lower() in s.lower()
+        ]
 
     return templates.TemplateResponse(
         request=request,
         name="students.html",
         context={
-            "students": students
+            "students": students,
+            "search": search
         }
     )
 

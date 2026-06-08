@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>BodyProgress</title>
-</head>
-<body>
 
-<h1>BodyProgress</h1>
+    <title>BodyProgress</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h1 class="mb-4">
+    BodyProgress Dashboard
+</h1>
 
 <form action="/submit" method="post">
 
     <p>姓名</p>
-    <input type="text" name="name">
+    <input
+            class="form-control"
+            type="text"
+            name="name">
 
     <p>日期</p>
     <input type="date" name="date">
 
     <p>體重</p>
-    <input type="number" step="0.1" name="weight">
+    <input
+            class="form-control"
+            type="number" step="0.1" name="weight">
 
     <p>體脂</p>
-    <input type="number" step="0.1" name="bodyfat">
+    <input
+            class="form-control"
+            type="number" step="0.1" name="bodyfat">
 
     <p>肌肉量</p>
-    <input type="number" step="0.1" name="muscle">
+    <input
+            class="form-control"
+            type="number" step="0.1" name="muscle">
 
     <p>內臟脂肪</p>
-    <input type="number" step="0.1" name="visceral_fat">
+    <input
+            class="form-control"
+            type="number" step="0.1" name="visceral_fat">
 
     <br><br>
 
-    <button type="submit">
-        新增資料
+    <button
+            type="submit"
+            class="btn btn-primary">
+            新增資料
     </button>
 
 </form>
+
+</div>
 
 </body>
 </html>

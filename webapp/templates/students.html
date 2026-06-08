@@ -11,11 +11,45 @@
 
 </head>
 
-<body class="container mt-5">
+<body class="bg-light">
+
+<div class="container mt-5">
 
 <h1 class="mb-4">
 BodyProgress 學員管理
 </h1>
+
+<form
+    method="get"
+    action="/students"
+    class="row g-3 mb-4">
+
+    <div class="col-auto">
+
+        <input
+            type="text"
+            name="search"
+            value="{{ search }}"
+            placeholder="搜尋學員"
+            class="form-control">
+
+    </div>
+
+    <div class="col-auto">
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+
+            搜尋
+
+        </button>
+
+    </div>
+
+</form>
+
+<br>
 
 <a href="/form" class="btn btn-primary mb-4">
 新增資料
@@ -23,31 +57,41 @@ BodyProgress 學員管理
 
 {% for student in students %}
 
-<div class="card mb-3">
+<div class="card mb-3 shadow-sm">
 
-<div class="card-body">
+    <div class="card-body d-flex justify-content-between align-items-center">
 
-<h4>{{ student }}</h4>
+        <h4 class="mb-0">
+            {{ student }}
+        </h4>
 
-<a href="/student/{{ student }}"
-class="btn btn-success">
+        <div>
 
-查看資料
+            <a
+                href="/student/{{ student }}"
+                class="btn btn-success">
 
-</a>
+                查看資料
 
-<a href="/download_report/{{ student }}"
-class="btn btn-secondary">
+            </a>
 
-PDF
+            <a
+                href="/download_report/{{ student }}"
+                class="btn btn-secondary">
 
-</a>
+                PDF
 
-</div>
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
 {% endfor %}
+
+</div>
 
 </body>
 
