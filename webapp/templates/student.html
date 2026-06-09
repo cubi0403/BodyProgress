@@ -27,73 +27,260 @@
 
 <hr>
 
-<h4>最新身體數據</h4>
+<h4 class="mb-3">最新身體數據</h4>
 
-<ul class="list-group">
+<div class="row">
 
-<li class="list-group-item">
-體重：{{ weight }} kg
-</li>
+    <div class="col-md-3">
 
-<li class="list-group-item">
-體脂：{{ bodyfat }} %
-</li>
+        <div class="card text-center border-primary mb-3">
 
-<li class="list-group-item">
-肌肉量：{{ muscle }} kg
-</li>
+            <div class="card-body">
 
-<li class="list-group-item">
-內臟脂肪：{{ visceral_fat }}
-</li>
+                <h5>體重</h5>
 
-</ul>
+                <h2>{{ weight }}</h2>
+
+                <p>kg</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card text-center border-danger mb-3">
+
+            <div class="card-body">
+
+                <h5>體脂</h5>
+
+                <h2>{{ bodyfat }}</h2>
+
+                <p>%</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card text-center border-success mb-3">
+
+            <div class="card-body">
+
+                <h5>肌肉量</h5>
+
+                <h2>{{ muscle }}</h2>
+
+                <p>kg</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card text-center border-warning mb-3">
+
+            <div class="card-body">
+
+                <h5>內臟脂肪</h5>
+
+                <h2>{{ visceral_fat }}</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 <hr>
 
-<h4>進度分析</h4>
+<h4 class="mt-4 mb-3">進度分析</h4>
 
-<ul class="list-group">
+<div class="row">
 
-<li class="list-group-item">
-體重變化：{{ weight_change }} kg
-</li>
+    <div class="col-md-3">
 
-<li class="list-group-item">
-體脂變化：{{ bodyfat_change }} %
-</li>
+        <div class="card bg-light">
 
-<li class="list-group-item">
-肌肉量變化：{{ muscle_change }} kg
-</li>
+            <div class="card-body text-center">
 
-<li class="list-group-item">
-內臟脂肪變化：{{ visceral_change }}
-</li>
+                <h6>體重變化</h6>
 
-</ul>
+                <h3>{{ weight_change }}</h3>
+
+                <small>kg</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-light">
+
+            <div class="card-body text-center">
+
+                <h6>體脂變化</h6>
+
+                <h3>{{ bodyfat_change }}</h3>
+
+                <small>%</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-light">
+
+            <div class="card-body text-center">
+
+                <h6>肌肉量變化</h6>
+
+                <h3>{{ muscle_change }}</h3>
+
+                <small>kg</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-light">
+
+            <div class="card-body text-center">
+
+                <h6>內臟脂肪變化</h6>
+
+                <h3>{{ visceral_change }}</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 <br>
-<h4 class="mt-4">體重變化</h4>
+<hr>
 
-<img
-    src="/chart/{{ student }}/weight"
-    class="img-fluid border rounded"
->
+<h4 class="mt-4 mb-3">
+    身體數據趨勢
+</h4>
 
-<br>
-  <br>
+<div class="row">
 
-<h4>體脂變化</h4>
+    <div class="col-md-6">
 
-<img
-    src="/chart/{{ student }}/bodyfat"
-    class="img-fluid border rounded"
->
-<a href="/download_report/{{ student }}"
-class="btn btn-primary">
+        <div class="card mb-4">
 
-下載 PDF 報告
+            <div class="card-body">
 
-</a>
+                <h5>體重變化</h5>
+
+                <img
+                    src="/chart/{{ student }}/weight"
+                    class="img-fluid rounded"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+
+                <h5>體脂變化</h5>
+
+                <img
+                    src="/chart/{{ student }}/bodyfat"
+                    class="img-fluid rounded"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+
+                <h5>肌肉量變化</h5>
+
+                <img
+                    src="/chart/{{ student }}/muscle"
+                    class="img-fluid rounded"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+
+                <h5>內臟脂肪變化</h5>
+
+                <img
+                    src="/chart/{{ student }}/visceral_fat"
+                    class="img-fluid rounded"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-4">
+
+    <a
+        href="/download_report/{{ student }}"
+        class="btn btn-lg btn-primary">
+
+        下載 PDF 報告
+
+    </a>
+
+</div>
 
 </div>
 
