@@ -1,3 +1,16 @@
+## Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Student List
+
+![Students](screenshots/students.png)
+
+### Student Detail
+
+![Detail](screenshots/student_detail.png)
 # BodyProgress
 
 BodyProgress 是一個健身與體態追蹤系統。
