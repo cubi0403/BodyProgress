@@ -38,7 +38,7 @@ Users can record body measurements, track progress through charts, and generate 
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ### Student List
 
