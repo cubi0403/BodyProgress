@@ -1,3 +1,39 @@
+# BodyProgress
+
+BodyProgress is a fitness progress tracking system built with FastAPI.
+
+Users can record body measurements, track progress through charts, and generate PDF reports for students.
+
+---
+
+## Features
+
+### Dashboard
+
+* Student count
+* Measurement count
+* Bootstrap UI
+
+### Student Management
+
+* Add measurements
+* Search students
+* View student details
+
+### Progress Charts
+
+* Weight trend
+* Body fat trend
+* Muscle trend
+* Visceral fat trend
+
+### PDF Reports
+
+* Generate PDF reports automatically
+* Download reports from the web interface
+
+---
+
 ## Screenshots
 
 ### Dashboard
@@ -10,19 +46,9 @@
 
 ### Student Detail
 
-![Detail](screenshots/student_detail.png)
-# BodyProgress
+![Student Detail](screenshots/student_detail.png)
 
-BodyProgress 是一個健身與體態追蹤系統。
-
-使用者可以：
-
-* 新增身體測量資料
-* 查看學員列表
-* 搜尋學員
-* 查看個人身體數據
-* 產生進度圖表
-* 下載 PDF 報告
+---
 
 ## Tech Stack
 
@@ -34,39 +60,50 @@ BodyProgress 是一個健身與體態追蹤系統。
 * Jinja2
 * Bootstrap 5
 
-## Features
+---
 
-### Dashboard
+## Project Structure
 
-顯示：
+```text
+BodyProgress
+│
+├── webapp/
+├── templates/
+├── pdf_reports/
+├── charts/
+├── screenshots/
+├── students.csv
+├── chart.py
+├── pdf_report.py
+└── README.md
+```
 
-* 學員總數
-* 測量紀錄總數
+---
 
-### Student Management
-
-* 新增學員測量資料
-* 搜尋學員
-* 查看詳細資料
-
-### Charts
-
-* 體重變化
-* 體脂變化
-* 肌肉量變化
-* 內臟脂肪變化
-
-### PDF Reports
-
-自動產生 PDF 進度報告。
-
-## Run
+## Installation
 
 ```bash
 pip install -r requirements.txt
+```
+
+Run:
+
+```bash
 uvicorn webapp.app:app --reload
 ```
 
 Open:
 
+```text
 http://127.0.0.1:8000
+```
+
+---
+
+## Future Improvements
+
+* SQLite database
+* User authentication
+* Cloud deployment
+* Docker support
+* Export Excel reports
