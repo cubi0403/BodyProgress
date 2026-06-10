@@ -62,6 +62,29 @@ Users can record body measurements, track progress through charts, and generate 
 
 ---
 
+## Database
+
+BodyProgress now uses SQLite as its primary database.
+
+Database file:
+
+bodyprogress.db
+
+Table:
+
+measurements
+
+Fields:
+
+* name
+* date
+* weight
+* bodyfat
+* muscle
+* visceral_fat
+
+---
+
 ## Project Structure
 
 ```text
