@@ -1,7 +1,7 @@
 import csv
 import os
 
-filename = "students.csv"
+filename = "student_detail.csv"
 
 print("\n=== 新增學員量測資料 ===\n")
 

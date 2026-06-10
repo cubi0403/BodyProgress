@@ -1,15 +1,12 @@
-# PyCharm
-.idea/
-
-# Python
-__pycache__/
+**pycache**/
 *.pyc
 
-# Reports
-reports/
-
-# PDFs
+charts/
 pdf_reports/
 
-# Optional charts
-# charts/
+bodyprogress.db
+
+.idea/
+.vscode/
+
+.env

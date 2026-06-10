@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-df = pd.read_csv("students.csv")
+df = pd.read_csv("student_detail.csv")
 
 os.makedirs("reports", exist_ok=True)
 

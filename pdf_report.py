@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import sqlite3
 
 from reportlab.platypus import (
     SimpleDocTemplate,
@@ -22,7 +23,14 @@ pdfmetrics.registerFont(
     )
 )
 
-df = pd.read_csv("students.csv")
+conn = sqlite3.connect("bodyprogress.db")
+
+df = pd.read_sql_query(
+    "SELECT * FROM measurements",
+    conn
+)
+
+conn.close()
 
 os.makedirs("pdf_reports", exist_ok=True)
 

@@ -2,7 +2,7 @@ import csv
 
 students = {}
 
-with open("students.csv", encoding="utf-8") as file:
+with open("student_detail.csv", encoding="utf-8") as file:
     reader = csv.DictReader(file)
 
     for row in reader:

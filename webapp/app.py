@@ -10,8 +10,17 @@ from fastapi import Request
 import pandas as pd
 import os
 import subprocess
+import sqlite3
 
 app = FastAPI()
+
+def get_db():
+
+    conn = sqlite3.connect("bodyprogress.db")
+
+    conn.row_factory = sqlite3.Row
+
+    return conn
 
 templates = Jinja2Templates(
     directory="webapp/templates"
@@ -20,11 +29,23 @@ templates = Jinja2Templates(
 @app.get("/")
 def dashboard(request: Request):
 
-    df = pd.read_csv("students.csv")
+    conn = get_db()
 
-    student_count = df["name"].nunique()
+    student_count = conn.execute(
+        """
+        SELECT COUNT(DISTINCT name)
+        FROM measurements
+        """
+    ).fetchone()[0]
 
-    measurement_count = len(df)
+    measurement_count = conn.execute(
+        """
+        SELECT COUNT(*)
+        FROM measurements
+        """
+    ).fetchone()[0]
+
+    conn.close()
 
     return templates.TemplateResponse(
         request=request,
@@ -44,6 +65,7 @@ def form_page(request: Request):
         context={}
     )
 
+
 class Measurement(BaseModel):
     name: str
     date: str
@@ -52,24 +74,35 @@ class Measurement(BaseModel):
     muscle: float
     visceral_fat: float
 
-
 @app.post("/add_measurement")
 def add_measurement(data: Measurement):
 
-    file = "students.csv"
+    print("收到資料:", data)
 
-    new_row = pd.DataFrame([data.model_dump()])
+    conn = get_db()
 
-    if os.path.exists(file):
-        df = pd.read_csv(file)
-        df = pd.concat([df, new_row], ignore_index=True)
-    else:
-        df = new_row
+    conn.execute(
+        """
+        INSERT INTO measurements
+        (name, date, weight, bodyfat, muscle, visceral_fat)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            data.name,
+            data.date,
+            data.weight,
+            data.bodyfat,
+            data.muscle,
+            data.visceral_fat
+        )
+    )
 
-    df.to_csv(file, index=False)
+    conn.commit()
+
+    conn.close()
 
     return {
-        "message": "Measurement added successfully",
+        "message": "success",
         "student": data.name
     }
 
@@ -130,25 +163,27 @@ def submit_form(
         muscle: float = Form(...),
         visceral_fat: float = Form(...)
 ):
+    conn = get_db()
 
-    file = "students.csv"
+    conn.execute(
+        """
+        INSERT INTO measurements
+        (name, date, weight, bodyfat, muscle, visceral_fat)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            name,
+            date,
+            weight,
+            bodyfat,
+            muscle,
+            visceral_fat
+        )
+    )
 
-    new_row = pd.DataFrame([{
-        "name": name,
-        "date": date,
-        "weight": weight,
-        "bodyfat": bodyfat,
-        "muscle": muscle,
-        "visceral_fat": visceral_fat
-    }])
+    conn.commit()
 
-    if os.path.exists(file):
-        df = pd.read_csv(file)
-        df = pd.concat([df, new_row], ignore_index=True)
-    else:
-        df = new_row
-
-    df.to_csv(file, index=False)
+    conn.close()
 
     subprocess.run(
         ["python", "chart.py"],
@@ -174,9 +209,17 @@ def students_page(
     search: str = ""
 ):
 
-    df = pd.read_csv("students.csv")
+    conn = get_db()
 
-    students = sorted(df["name"].unique())
+    rows = conn.execute("""
+        SELECT DISTINCT name
+        FROM measurements
+        ORDER BY name
+    """).fetchall()
+
+    students = [row["name"] for row in rows]
+
+    conn.close()
 
     if search:
 
@@ -200,12 +243,22 @@ def student_page(
         student: str
 ):
 
-    df = pd.read_csv("students.csv")
+    conn = get_db()
 
-    data = df[df["name"] == student]
+    rows = conn.execute(
+        """
+        SELECT *
+        FROM measurements
+        WHERE name = ?
+        ORDER BY date
+        """,
+        (student,)
+    ).fetchall()
 
-    latest = data.iloc[-1]
-    first = data.iloc[0]
+    conn.close()
+
+    latest = rows[-1]
+    first = rows[0]
 
     weight_change = latest["weight"] - first["weight"]
     bodyfat_change = latest["bodyfat"] - first["bodyfat"]

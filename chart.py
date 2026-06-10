@@ -1,11 +1,18 @@
 import os
-
 import pandas as pd
 import matplotlib.pyplot as plt
+import sqlite3
 
 
 # 讀取資料
-df = pd.read_csv("students.csv")
+conn = sqlite3.connect("bodyprogress.db")
+
+df = pd.read_sql_query(
+    "SELECT * FROM measurements",
+    conn
+)
+
+conn.close()
 
 
 # 建立圖表資料夾
