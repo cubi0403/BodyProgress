@@ -1,8 +1,9 @@
-**pycache**/
+__pycache__/
 *.pyc
 
 charts/
 pdf_reports/
+reports/
 
 bodyprogress.db
 
